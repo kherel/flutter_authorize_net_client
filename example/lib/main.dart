@@ -20,8 +20,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _client = AuthorizeNetClient(
-      '5KP3u95bQpv',
-      '346HZ32z3fP4hTG2',
+      '5av6VLQ29',
+      '3Ut92N9FBpW65HuU',
       environment: AuthorizeNetClient.ENV_TEST,
     );
   }
@@ -65,31 +65,31 @@ class _MyAppState extends State<MyApp> {
             softWrap: true,
             maxLines: 2,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                child: Text('Test Authenticate Client'),
-                onPressed: () async {
-                  final response = await _client.authenticationTest();
-                  print('response: \n${response.toJson()}');
-                  addLog('isSuccessFul: ${response.isSuccessful}');
-                  addLog(jsonEncode(response.toJson()));
-                },
-              ),
-              ElevatedButton(
-                child: Text('Clear Logs'),
-                onPressed: () async {
-                  _logs.value = 'Initial Log';
-                },
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     ElevatedButton(
+          //       child: Text('Test Authenticate Client'),
+          //       onPressed: () async {
+          //         final response = await _client.authenticationTest();
+          //         print('response: \n${response.toJson()}');
+          //         addLog('isSuccessFul: ${response.isSuccessful}');
+          //         addLog(jsonEncode(response.toJson()));
+          //       },
+          //     ),
+          //     ElevatedButton(
+          //       child: Text('Clear Logs'),
+          //       onPressed: () async {
+          //         _logs.value = 'Initial Log';
+          //       },
+          //     ),
+          //   ],
+          // ),
           ElevatedButton(
             child: Text('1. Charge card'),
             onPressed: () async {
               final response = await _client.chargeCreditCard(
-                '5',
+                '86',
                 'USD'.toLowerCase(),
                 '5424000000000015',
                 '2022-12',
@@ -100,71 +100,71 @@ class _MyAppState extends State<MyApp> {
               addLog(jsonEncode(response.toJson()));
             },
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                child: Text('2.1 Authorize payment *'),
-                onPressed: () async {
-                  final response = await _client.authorizeCardPayment(
-                    '5',
-                    'USD'.toLowerCase(),
-                    '5424000000000015',
-                    '2022-12',
-                    '123',
-                  );
-                  print('response: \n${response.toJson()}');
-                  addLog('isSuccessFul: ${response.isSuccessful}');
-                  addLog(jsonEncode(response.toJson()));
-                  _refID = response?.transactionResponse?.transId;
-                },
-              ),
-              ElevatedButton(
-                child: Text('2.2 Charge Pre-Authorized payment *'),
-                onPressed: () async {
-                  assert(_refID != null,
-                      'Transaction Reference ID should not be null.');
-                  final response = await _client.priorAuthCaptureTransaction(
-                    '5',
-                    'USD'.toLowerCase(),
-                    _refID,
-                  );
-                  print('response: \n${response.toJson()}');
-                  addLog('isSuccessFul: ${response.isSuccessful}');
-                  addLog(jsonEncode(response.toJson()));
-                },
-              ),
-            ],
-          ),
-          ElevatedButton(
-            child: Text('3. Void Payment *'),
-            onPressed: () async {
-              assert(_refID != null,
-                  'Transaction Reference ID should not be null.');
-              final response = await _client.voidTransaction(_refID);
-              print('response: \n${response.toJson()}');
-              addLog('isSuccessFul: ${response.isSuccessful}');
-              addLog(jsonEncode(response.toJson()));
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                child: Text('Print reference ID *'),
-                onPressed: () async {
-                  addLog('Reference ID: $_refID');
-                },
-              ),
-              ElevatedButton(
-                child: Text('Clear local reference ID *'),
-                onPressed: () async {
-                  _refID = null;
-                  addLog('Reference ID cleared');
-                },
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     ElevatedButton(
+          //       child: Text('2.1 Authorize payment *'),
+          //       onPressed: () async {
+          //         final response = await _client.authorizeCardPayment(
+          //           '5',
+          //           'USD'.toLowerCase(),
+          //           '5424000000000015',
+          //           '2022-12',
+          //           '123',
+          //         );
+          //         print('response: \n${response.toJson()}');
+          //         addLog('isSuccessFul: ${response.isSuccessful}');
+          //         addLog(jsonEncode(response.toJson()));
+          //         _refID = response?.transactionResponse?.transId;
+          //       },
+          //     ),
+          //     ElevatedButton(
+          //       child: Text('2.2 Charge Pre-Authorized payment *'),
+          //       onPressed: () async {
+          //         assert(_refID != null,
+          //             'Transaction Reference ID should not be null.');
+          //         final response = await _client.priorAuthCaptureTransaction(
+          //           '5',
+          //           'USD'.toLowerCase(),
+          //           _refID,
+          //         );
+          //         print('response: \n${response.toJson()}');
+          //         addLog('isSuccessFul: ${response.isSuccessful}');
+          //         addLog(jsonEncode(response.toJson()));
+          //       },
+          //     ),
+          //   ],
+          // ),
+          // ElevatedButton(
+          //   child: Text('3. Void Payment *'),
+          //   onPressed: () async {
+          //     assert(_refID != null,
+          //         'Transaction Reference ID should not be null.');
+          //     final response = await _client.voidTransaction(_refID);
+          //     print('response: \n${response.toJson()}');
+          //     addLog('isSuccessFul: ${response.isSuccessful}');
+          //     addLog(jsonEncode(response.toJson()));
+          //   },
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     ElevatedButton(
+          //       child: Text('Print reference ID *'),
+          //       onPressed: () async {
+          //         addLog('Reference ID: $_refID');
+          //       },
+          //     ),
+          //     ElevatedButton(
+          //       child: Text('Clear local reference ID *'),
+          //       onPressed: () async {
+          //         _refID = null;
+          //         addLog('Reference ID cleared');
+          //       },
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
